@@ -1,4 +1,6 @@
-﻿namespace L2___Messaging_System_og_Channels
+﻿using System;
+
+namespace L7___Messaging_Channels
 {
     public class AirlineCompanyBuilder
     {
@@ -6,8 +8,7 @@
         private string departure = "";
         private string flightNo = "";
         private string destination = "";
-        private string checkIn = "";
-        private string gate = "";
+        private DateTime eta_arrived = DateTime.MinValue;
 
         public AirlineCompanyBuilder WithCompanyName(string companyName)
         {
@@ -33,21 +34,15 @@
             return this;
         }
 
-        public AirlineCompanyBuilder WithCheckIn(string checkIn)
+        public AirlineCompanyBuilder withArrivedETA(DateTime eta)
         {
-            this.checkIn = checkIn;
-            return this;
-        }
-
-        public AirlineCompanyBuilder WithGate(string gate)
-        {
-            this.gate = gate;
+            this.eta_arrived = eta;
             return this;
         }
 
         public AirlineCompany Build()
         {
-            return new AirlineCompany(companyName, departure, flightNo, destination, checkIn, gate);
+            return new AirlineCompany(companyName, departure, flightNo, destination, eta_arrived);
         }
     }
 }

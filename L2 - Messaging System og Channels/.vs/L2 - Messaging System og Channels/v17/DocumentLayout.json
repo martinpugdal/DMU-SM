@@ -3,12 +3,22 @@
   "WorkspaceRootPath": "C:\\Users\\Marti\\OneDrive - EFIF\\Dokumenter\\GitHub\\DMU-SM\\L2 - Messaging System og Channels\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|L2 - Messaging System og Channels||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2CE2D53-9E21-4777-B551-00BD78D48F6B}|L2 - Messaging System og Channels\\L2 - Messaging System og Channels.csproj|C:\\Users\\Marti\\OneDrive - EFIF\\Dokumenter\\GitHub\\DMU-SM\\L2 - Messaging System og Channels\\l2 - messaging system og channels\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2CE2D53-9E21-4777-B551-00BD78D48F6B}|L2 - Messaging System og Channels\\L2 - Messaging System og Channels.csproj|solutionrelative:l2 - messaging system og channels\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2CE2D53-9E21-4777-B551-00BD78D48F6B}|L2 - Messaging System og Channels\\L2 - Messaging System og Channels.csproj|C:\\Users\\Marti\\OneDrive - EFIF\\Dokumenter\\GitHub\\DMU-SM\\L2 - Messaging System og Channels\\l2 - messaging system og channels\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2CE2D53-9E21-4777-B551-00BD78D48F6B}|L2 - Messaging System og Channels\\L2 - Messaging System og Channels.csproj|solutionrelative:l2 - messaging system og channels\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2CE2D53-9E21-4777-B551-00BD78D48F6B}|L2 - Messaging System og Channels\\L2 - Messaging System og Channels.csproj|c:\\users\\marti\\onedrive - efif\\dokumenter\\github\\dmu-sm\\l2 - messaging system og channels\\l2 - messaging system og channels\\airlinecenterrouter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2CE2D53-9E21-4777-B551-00BD78D48F6B}|L2 - Messaging System og Channels\\L2 - Messaging System og Channels.csproj|C:\\Users\\Marti\\OneDrive - EFIF\\Dokumenter\\GitHub\\DMU-SM\\L2 - Messaging System og Channels\\l2 - messaging system og channels\\airlinecenterrouter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2CE2D53-9E21-4777-B551-00BD78D48F6B}|L2 - Messaging System og Channels\\L2 - Messaging System og Channels.csproj|solutionrelative:l2 - messaging system og channels\\airlinecenterrouter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2CE2D53-9E21-4777-B551-00BD78D48F6B}|L2 - Messaging System og Channels\\L2 - Messaging System og Channels.csproj|c:\\users\\marti\\onedrive - efif\\dokumenter\\github\\dmu-sm\\l2 - messaging system og channels\\l2 - messaging system og channels\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
     }
   ],
   "DocumentGroupContainers": [
@@ -21,8 +31,36 @@
           "SelectedChildIndex": 1,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "L2 - Messaging System og Channels",
+              "DocumentMoniker": "C:\\Users\\Marti\\OneDrive - EFIF\\Dokumenter\\GitHub\\DMU-SM\\L2 - Messaging System og Channels\\L2 - Messaging System og Channels\\L2 - Messaging System og Channels.csproj",
+              "RelativeDocumentMoniker": "L2 - Messaging System og Channels\\L2 - Messaging System og Channels.csproj",
+              "ToolTip": "C:\\Users\\Marti\\OneDrive - EFIF\\Dokumenter\\GitHub\\DMU-SM\\L2 - Messaging System og Channels\\L2 - Messaging System og Channels\\L2 - Messaging System og Channels.csproj",
+              "RelativeToolTip": "L2 - Messaging System og Channels\\L2 - Messaging System og Channels.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-09-11T07:22:28.959Z",
+              "EditorCaption": ""
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "App.config",
+              "DocumentMoniker": "C:\\Users\\Marti\\OneDrive - EFIF\\Dokumenter\\GitHub\\DMU-SM\\L2 - Messaging System og Channels\\L2 - Messaging System og Channels\\App.config",
+              "RelativeDocumentMoniker": "L2 - Messaging System og Channels\\App.config",
+              "ToolTip": "C:\\Users\\Marti\\OneDrive - EFIF\\Dokumenter\\GitHub\\DMU-SM\\L2 - Messaging System og Channels\\L2 - Messaging System og Channels\\App.config",
+              "RelativeToolTip": "L2 - Messaging System og Channels\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-09-11T07:21:18.484Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "AirlineCenterRouter.cs",
               "DocumentMoniker": "C:\\Users\\Marti\\OneDrive - EFIF\\Dokumenter\\GitHub\\DMU-SM\\L2 - Messaging System og Channels\\L2 - Messaging System og Channels\\AirlineCenterRouter.cs",
               "RelativeDocumentMoniker": "L2 - Messaging System og Channels\\AirlineCenterRouter.cs",
@@ -30,21 +68,19 @@
               "RelativeToolTip": "L2 - Messaging System og Channels\\AirlineCenterRouter.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAAYwB8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-28T08:43:15.402Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-28T08:43:15.402Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Marti\\OneDrive - EFIF\\Dokumenter\\GitHub\\DMU-SM\\L2 - Messaging System og Channels\\L2 - Messaging System og Channels\\Program.cs",
               "RelativeDocumentMoniker": "L2 - Messaging System og Channels\\Program.cs",
               "ToolTip": "C:\\Users\\Marti\\OneDrive - EFIF\\Dokumenter\\GitHub\\DMU-SM\\L2 - Messaging System og Channels\\L2 - Messaging System og Channels\\Program.cs",
               "RelativeToolTip": "L2 - Messaging System og Channels\\Program.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAgwDMAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-28T06:32:25.535Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-28T06:32:25.535Z"
             }
           ]
         }
