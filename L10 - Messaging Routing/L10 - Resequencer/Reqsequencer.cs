@@ -13,8 +13,8 @@ namespace L10___Resequencer
         private MessageQueue outputQueue;
 
         private Dictionary<int, XmlDocument> passengers = new Dictionary<int, XmlDocument>();
-        private Dictionary<int, List<XmlDocument>> luggages = new Dictionary<int, List<XmlDocument>>();
-
+        private Dictionary<int, Dictionary<int, XmlDocument>> luggages = new Dictionary<int, Dictionary<int, XmlDocument>>();
+        
         public Reqsequencer(MessageQueue outputQueue, MessageQueue passengerQueue, MessageQueue luggageQueue)
         {
             this.outputQueue = outputQueue;
@@ -32,6 +32,7 @@ namespace L10___Resequencer
         {
             MessageQueue mq = (MessageQueue)source;
             Message message = mq.EndReceive(asyncResult.AsyncResult);
+            message.Formatter = new XmlMessageFormatter(new String[] { "System.String,mscorlib" });
 
             XmlDocument xml = new XmlDocument();
 
@@ -44,21 +45,19 @@ namespace L10___Resequencer
                 // check if the message is a passenger
                 if (node != null)
                 {
-                    Console.WriteLine("Passenger: 1");
                     RunPassenger(xml);
                 }
                 else
                 {
-                    Console.WriteLine("Luggage: 1");
                     node = xml.SelectSingleNode("/Luggage");
                     // check if the message is a luggage
                     if (node != null)
                     {
-                        Console.WriteLine("Luggage: 2");
                         RunLuggage(xml);
                     }
                 }
 
+                // Continue receiving messages
                 mq.BeginReceive();
             }
         }
@@ -70,20 +69,16 @@ namespace L10___Resequencer
             XmlNode passengerNode = passengerXml.SelectSingleNode("/Passenger");
             if (passengerNode != null)
             {
-                Console.WriteLine(passengerNode.OuterXml);
                 string[] lugParts = passengerNode.SelectSingleNode("LuggageId").InnerText.Split('-');
                 int seqNo = int.Parse(lugParts[0]);
                 int luggageSize = int.Parse(lugParts[1]);
 
-                Console.WriteLine("SeqNo: " + seqNo);
-                Console.WriteLine("LuggageSize: " + luggageSize);
+                Console.WriteLine("Passenger/SeqNo: " + seqNo);
+                Console.WriteLine("Passenger/LuggageSize: " + luggageSize);
 
                 passengers.Add(seqNo, passengerXml);
 
-                CheckRequestFilled(seqNo);
-
-                passengerQueue.BeginReceive();
-                Console.WriteLine(passengerXml.OuterXml);
+                CheckRequestFilledAndSend(seqNo);
             }
         }
 
@@ -96,26 +91,24 @@ namespace L10___Resequencer
                 int PassengerId = int.Parse(luggageNode.SelectSingleNode("PassengerId").InnerText);
                 int luggageId = int.Parse(luggageNode.SelectSingleNode("Identification").InnerText);
 
-                Console.WriteLine("PassengerId: " + PassengerId);
-                Console.WriteLine("LuggageId: " + luggageId);
+                Console.WriteLine("Luggage/PassengerId: " + PassengerId);
+                Console.WriteLine("Luggage/Id: " + luggageId);
 
                 if (luggages.ContainsKey(PassengerId))
                 {
-                    luggages[PassengerId].Add(luggageXml);
+                    // Insert luggage in correct order based on luggageId
+                    luggages[PassengerId].Add(luggageId, luggageXml);
                 }
                 else
                 {
-                    luggages.Add(PassengerId, new List<XmlDocument> { luggageXml });
+                    luggages.Add(PassengerId, new Dictionary<int, XmlDocument> { { luggageId, luggageXml } });
                 }
 
-                CheckRequestFilled(PassengerId);
-
-                luggageQueue.BeginReceive();
-                Console.WriteLine(luggageXml.OuterXml);
+                CheckRequestFilledAndSend(PassengerId);
             }
         }
 
-        private void CheckRequestFilled(int seqNo)
+        private void CheckRequestFilledAndSend(int seqNo)
         {
             passengers.TryGetValue(seqNo, out XmlDocument passengerXml);
             if (passengerXml == null) return;
@@ -124,24 +117,41 @@ namespace L10___Resequencer
             int luggageSize = int.Parse(passengerNode.SelectSingleNode("LuggageId").InnerText.Split('-')[1]);
             if (!luggages.ContainsKey(seqNo) || luggages[seqNo].Count < luggageSize) return;
 
+            Console.WriteLine("Passenger and luggage details filled for seqNo: " + seqNo);
+
+            // Create correlationId
+            //string uuid = Guid.NewGuid().ToString();
+            string uuid = "00000000-0000-0000-0000-000000000000";
+            string correlationId = uuid + @"\" + seqNo;
+
             // Send the passenger and luggage details to the output queue in the correct order
             Message passengerMessage = new Message(passengerXml.OuterXml)
             {
-                Formatter = new XmlMessageFormatter(new String[] { "System.String,mscorlib" })
+                Formatter = new XmlMessageFormatter(new String[] { "System.String,mscorlib" }),
+                CorrelationId = correlationId
             };
 
-            string _correlationId = passengerMessage.CorrelationId;
             outputQueue.Send(passengerMessage);
 
-            foreach (var luggageXml in luggages[seqNo])
+
+            foreach (var luggageXml in luggages[seqNo].Values)
             {
                 Message luggageMessage = new Message(luggageXml.OuterXml)
                 {
                     Formatter = new XmlMessageFormatter(new String[] { "System.String,mscorlib" }),
-                    CorrelationId = _correlationId
+                    CorrelationId = correlationId
                 };
                 outputQueue.Send(luggageMessage);
             }
+
+            Console.WriteLine("Passenger and luggage details sent to the output queue in the correct order with seqNo: " + seqNo);
+            Console.WriteLine("Passenger: " + passengerXml.OuterXml);
+            Console.WriteLine("Luggages: ");
+            foreach (var luggageXml in luggages[seqNo].Values)
+            {
+                Console.WriteLine(luggageXml.OuterXml);
+            }
+            Console.WriteLine();
 
             passengers.Remove(seqNo);
             luggages.Remove(seqNo);

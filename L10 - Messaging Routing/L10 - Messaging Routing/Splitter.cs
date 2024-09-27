@@ -39,13 +39,11 @@ namespace L10___Messaging_Routing
             xml.LoadXml(reader.ReadToEnd().ToString());
 
             XmlNode itemNode = xml.SelectSingleNode("/FlightDetailsInfoResponse");
-
-            XmlDocument passengerXml = new XmlDocument();
-            passengerXml.LoadXml(itemNode.SelectSingleNode("Passenger").OuterXml);
-
-            List<XmlDocument> luggagesXml = new List<XmlDocument>();
             if (itemNode != null)
             {
+                XmlDocument passengerXml = new XmlDocument();
+                passengerXml.LoadXml(itemNode.SelectSingleNode("Passenger").OuterXml);
+
                 // get the passenger details
                 XmlNode passengerNode = itemNode.SelectSingleNode("Passenger");
                 if (passengerNode != null)
@@ -65,6 +63,7 @@ namespace L10___Messaging_Routing
                 int thisSeqNo = lastSeqNo++;
 
                 // get the luggages details
+                List<XmlDocument> luggagesXml = new List<XmlDocument>();
                 XmlNodeList luggages = itemNode.SelectNodes("Luggage");
                 if (luggages != null)
                 {
@@ -91,20 +90,20 @@ namespace L10___Messaging_Routing
                             Console.WriteLine("Weight: " + luggageWeight);
                     }
                 }
-            }
 
-            // add luggages size to the passenger
-            XmlNode xmlNode = passengerXml.CreateNode(XmlNodeType.Element, "LuggageId", "");
-            xmlNode.InnerText = lastSeqNo + "-" + luggagesXml.Count;
-            passengerXml.DocumentElement.AppendChild(xmlNode);
+                // add luggages size to the passenger
+                XmlNode xmlNode = passengerXml.CreateNode(XmlNodeType.Element, "LuggageId", "");
+                xmlNode.InnerText = thisSeqNo + "-" + luggagesXml.Count;
+                passengerXml.DocumentElement.AppendChild(xmlNode);
 
-            // send the passenger details to the check-in service
-            checkInQueue.Send(passengerXml);
+                // send the passenger details to the check-in service
+                checkInQueue.Send(passengerXml);
 
-            // send the luggage details to the luggage service
-            foreach (XmlDocument luggageXml in luggagesXml)
-            {
-                luggageQueue.Send(luggageXml);
+                // send the luggage details to the luggage service
+                foreach (XmlDocument luggageXml in luggagesXml)
+                {
+                    luggageQueue.Send(luggageXml);
+                }
             }
 
             mq.BeginReceive();
